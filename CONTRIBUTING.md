@@ -9,37 +9,6 @@ _Currently only support [BITTREX](https://bittrex.com/)_
 ## Author
 * **vuquangtrong** at gmail dot com
 
-## Components
-I'd like to write some small modules first for some purposes:
-* Learning: to get firmiliar with script language, libraries
-* Testing: to debug and fix issues easier
-
-1. **CoinGraph**
-This module is to display the price in a nice graph area. When its code is tested, it will be integarated into **CoinsMonitor**.
-Practicing in GUI, Json, Graphics
-
-2. **CoinAlert**
-This module is to popup an alert when the price of selected coins go up/down to a threshold value. When its code is tested, it will be integarated into **CoinsMonitor**.
-Practicing in Json, ListView, Multiple Windows
-
-3. **CoinsMonitor**
-This will be the main program that has all feature of **CoinGraph**, and **CoinAlert**.
-It will support **TRADING** and **STOP-LIMIT** feature
-
-## Run
-* Run **.au3** script directly, or
-* Run **.exe** binary files
-
-## Changes
-**0.0.0.0**		24/09/2017		20:00
-* 	Initialize file
-
-## Dependencies
-* **WinHttp** for handling connections, requests 
-* **Json** for handling returned value from exchanges
-* **GraphGDIPlus** for displaying
-* **Hash HMAC** using SHA512 hashing for encrypted-method of account management
-
 ## Contributing guidelines
 I’d love you to help me improve this project. To help me keep this project high
 quality, I request that contributions adhere to the following guidelines.
