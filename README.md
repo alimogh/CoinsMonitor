@@ -13,7 +13,7 @@ Donations are welcome and will be accepted via below addresses:
 
 	BTC:	13e2SdFuyEzqw8dPjRNkyp6rDuTGKaW2rY
 	LTC:	LTAJo4s5eGGMtao5gVjXSCULXV7iSc9ZnL
-	
+
 Thank you for the shiny stuff :kiss:
 
 ## Components

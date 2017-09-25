@@ -53,6 +53,7 @@
 ; Public Functions:
 ; 	time($startDate = "1970/01/01")
 ; 	bittrex_openConnection()
+; 	bittrex_closeConnection()
 ; 	bittrex_getMarketSummary($sMarket)
 ; 	bittrex_getMarketHistory($sMarket)
 ; 	bittrex_getTicker($sMarket)
@@ -111,6 +112,24 @@ Func bittrex_openConnection()
 EndFunc   ;==>bittrex_openConnection
 
 ;==============================================================================
+; bittrex_closeConnection()
+; 	close connection to BitTrex exchange
+;==============================================================================
+Func bittrex_closeConnection()
+
+	If Not $g_bittrex_hHttpConnect Then
+		_WinHttpCloseHandle($g_bittrex_hHttpConnect)
+		$g_bittrex_hHttpConnect = Null
+	EndIf
+
+	If Not $g_bittrex_hHttpOpen Then
+		_WinHttpCloseHandle($g_bittrex_hHttpOpen)
+		$g_bittrex_hHttpOpen = Null
+	EndIf
+
+EndFunc   ;==>bittrex_closeConnection
+
+;==============================================================================
 ; bittrex_getMarketSummary($sMarket)
 ; 	return $Price[2] information of market in last 24h with details as below:
 ; 		$Price[0] - lowest price
@@ -166,7 +185,7 @@ Func bittrex_getMarketSummary($sMarket)
 	EndIf
 
 	; Check success
-	$Success = (Json_Get($g_bittrex_oJsonObject, "[success]") == "true")
+	$Success = Json_Get($g_bittrex_oJsonObject, "[success]")
 	If $Success Then
 		; Get info
 		$Price[0] = Number(Json_Get($g_bittrex_oJsonObject, "[result][0][Low]"))
@@ -238,7 +257,7 @@ Func bittrex_getMarketHistory($sMarket)
 	EndIf
 
 	; Check success
-	$Success = (Json_Get($g_bittrex_oJsonObject, "[success]") == "true")
+	$Success = Json_Get($g_bittrex_oJsonObject, "[success]")
 	If $Success Then
 		; Get info
 		Local $oJson_Result = Json_Get($g_bittrex_oJsonObject, "[result]")
@@ -307,7 +326,7 @@ Func bittrex_getTicker($sMarket)
 	EndIf
 
 	; Check success
-	$Success = (Json_Get($g_bittrex_oJsonObject, "[success]") == "true")
+	$Success = Json_Get($g_bittrex_oJsonObject, "[success]")
 	If $Success Then
 		; Get info
 		$PriceLast = Number(Json_Get($g_bittrex_oJsonObject, "[result][Last]"))
@@ -390,7 +409,7 @@ Func bittrex_buyLimit($sMarket, $fQuantity, $fRate)
 	EndIf
 
 	; Check success
-	$Success = (Json_Get($g_bittrex_oJsonObject, "[success]") == "true")
+	$Success = Json_Get($g_bittrex_oJsonObject, "[success]")
 	If $Success Then
 		; Get info
 		$UUID = Json_Get($g_bittrex_oJsonObject, "[result][uuid]")
@@ -456,7 +475,7 @@ Func bittrex_sellLimit($sMarket, $fQuantity, $fRate)
 	EndIf
 
 	; Check success
-	$Success = (Json_Get($g_bittrex_oJsonObject, "[success]") == "true")
+	$Success = Json_Get($g_bittrex_oJsonObject, "[success]")
 	If $Success Then
 		; Get info
 		$UUID = Json_Get($g_bittrex_oJsonObject, "[result][uuid]")
@@ -521,7 +540,7 @@ Func bittrex_cancel($sUUID)
 	EndIf
 
 	; Check success
-	$Success = (Json_Get($g_bittrex_oJsonObject, "[success]") == "true")
+	$Success = Json_Get($g_bittrex_oJsonObject, "[success]")
 	If $Success Then
 		$Canceled = True
 	Else
@@ -625,7 +644,7 @@ Func bittrex_getOpenOrders($sMarket = "")
 	EndIf
 
 	; Check success
-	$Success = (Json_Get($g_bittrex_oJsonObject, "[success]") == "true")
+	$Success = Json_Get($g_bittrex_oJsonObject, "[success]")
 	If $Success Then
 		; Get info
 		Local $oJson_Result = Json_Get($g_bittrex_oJsonObject, "[result]")
@@ -726,7 +745,7 @@ Func bittrex_getBalances()
 	EndIf
 
 	; Check success
-	$Success = (Json_Get($g_bittrex_oJsonObject, "[success]") == "true")
+	$Success = Json_Get($g_bittrex_oJsonObject, "[success]")
 	If $Success Then
 		; Get info
 		Local $oJson_Result = Json_Get($g_bittrex_oJsonObject, "[result]")
@@ -815,7 +834,7 @@ Func bittrex_getBalance($sCurrency)
 	EndIf
 
 	; Check success
-	$Success = (Json_Get($g_bittrex_oJsonObject, "[success]") == "true")
+	$Success = Json_Get($g_bittrex_oJsonObject, "[success]")
 	If $Success Then
 		; Get info
 		$Balance[0] = Number(Json_Get($g_bittrex_oJsonObject, "[success][Balance]"))
@@ -884,7 +903,7 @@ Func bittrex_getDepositAddress($sCurrency)
 	EndIf
 
 	; Check success
-	$Success = (Json_Get($g_bittrex_oJsonObject, "[success]") == "true")
+	$Success = Json_Get($g_bittrex_oJsonObject, "[success]")
 	If $Success Then
 		; Get info
 		$Address = Json_Get($g_bittrex_oJsonObject, "[result][Address]")

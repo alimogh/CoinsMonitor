@@ -67,7 +67,7 @@ Func Debug_init($sFilename = "")
 	; create debug file
 	If @Compiled Then
 		If ($g_IsEnableDebug) Then
-			$g_DebugFileHandler = FileOpen(@ScriptDir & "\" & $sFilename & @YEAR & @MON & @MDAY & "-" & @HOUR & @MIN & @SEC & ".log", $FO_OVERWRITE + $FO_CREATEPATH)
+			$g_DebugFileHandler = FileOpen(@ScriptDir & "\" & $sFilename & "_" & @YEAR & @MON & @MDAY & "-" & @HOUR & @MIN & @SEC & ".log", $FO_OVERWRITE + $FO_CREATEPATH)
 		EndIf
 	EndIf
 
