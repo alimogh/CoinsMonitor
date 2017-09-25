@@ -21,13 +21,15 @@ I'd like to write some small modules first for some purposes:
 * Learning: to get firmiliar with script language, libraries
 * Testing: to debug and fix issues easier
 
-1. **CoinGraph**
-This module is to display the price in a nice graph area. When its code is tested, it will be integarated into **CoinsMonitor**.
-Practicing in GUI, Json, Graphics
-
-2. **CoinAlert**
+1. **CoinAlert**
 This module is to popup an alert when the price of selected coins go up/down to a threshold value. When its code is tested, it will be integarated into **CoinsMonitor**.
 Practicing in Json, ListView, Multiple Windows
+
+![CoinAlert](./CoinAlert.jpg)
+
+2. **CoinGraph**
+This module is to display the price in a nice graph area. When its code is tested, it will be integarated into **CoinsMonitor**.
+Practicing in GUI, Json, Graphics
 
 3. **CoinsMonitor**
 This will be the main program that has all feature of **CoinGraph**, and **CoinAlert**.
@@ -45,6 +47,10 @@ It will support **TRADING** and **STOP-LIMIT** feature
 * 	Add Bittrex API
 * 	Add Hash HMAC
 * 	Add dependent files
+
+**0.0.0.2**		25/09/2017		17:00
+* 	Add CoinAlert v0.0.0.1
+* 	Update Bittrex API
 
 ## Dependencies
 * **WinHttp** for handling connections, requests
