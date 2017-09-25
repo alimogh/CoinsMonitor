@@ -207,9 +207,9 @@ EndFunc   ;==>bittrex_getMarketSummary
 ;	return $PriceHistory as an array of transactions
 ; 	$PriceHistory[0][0] - the number of transactions
 ; 		$PriceHistory[i][0] - TimeStamp
-; 		$PriceHistory[i][0] - Quantity
-; 		$PriceHistory[i][0] - Price
-; 		$PriceHistory[i][0] - OrderType
+; 		$PriceHistory[i][1] - Quantity
+; 		$PriceHistory[i][2] - Price
+; 		$PriceHistory[i][3] - OrderType
 ;==============================================================================
 Func bittrex_getMarketHistory($sMarket)
 	Local $Success = False

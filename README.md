@@ -31,6 +31,8 @@ Practicing in Json, ListView, Multiple Windows
 This module is to display the price in a nice graph area. When its code is tested, it will be integarated into **CoinsMonitor**.
 Practicing in GUI, Json, Graphics
 
+![CoinGraph](./CoinGraph.jpg)
+
 3. **CoinsMonitor**
 This will be the main program that has all feature of **CoinGraph**, and **CoinAlert**.
 It will support **TRADING** and **STOP-LIMIT** feature
@@ -48,9 +50,13 @@ It will support **TRADING** and **STOP-LIMIT** feature
 * 	Add Hash HMAC
 * 	Add dependent files
 
-**0.0.0.2**		25/09/2017		17:00
+**0.0.0.2**		25/09/2017		16:00
 * 	Add CoinAlert v0.0.0.1
 * 	Update Bittrex API
+
+**0.0.0.3**		25/09/2017		17:00
+* 	Add CoinGraph v0.0.0.1
+* 	Add dependent files
 
 ## Dependencies
 * **WinHttp** for handling connections, requests
