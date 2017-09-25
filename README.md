@@ -8,9 +8,12 @@ _Currently only support [BITTREX](https://bittrex.com/)_
 
 ## Author
 * **vuquangtrong** at gmail dot com
+
 Donations are welcome and will be accepted via below addresses:
+
 	BTC:	13e2SdFuyEzqw8dPjRNkyp6rDuTGKaW2rY
 	LTC:	LTAJo4s5eGGMtao5gVjXSCULXV7iSc9ZnL
+	
 Thank you for the shiny stuff :kiss:
 
 ## Components
@@ -51,6 +54,7 @@ It will support **TRADING** and **STOP-LIMIT** feature
 * **Bittrex** for openning API to exchange
 
 currently support Bittex APIs:
+
 	; ===========================================================================================
 	; Public Functions:
 	; 	time($startDate = "1970/01/01")
