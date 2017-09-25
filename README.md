@@ -8,6 +8,10 @@ _Currently only support [BITTREX](https://bittrex.com/)_
 
 ## Author
 * **vuquangtrong** at gmail dot com
+Donations are welcome and will be accepted via below addresses:
+	BTC:	13e2SdFuyEzqw8dPjRNkyp6rDuTGKaW2rY
+	LTC:	LTAJo4s5eGGMtao5gVjXSCULXV7iSc9ZnL
+Thank you for the shiny stuff :kiss:
 
 ## Components
 I'd like to write some small modules first for some purposes:
@@ -34,11 +38,34 @@ It will support **TRADING** and **STOP-LIMIT** feature
 **0.0.0.0**		24/09/2017		20:00
 * 	Initialize file
 
+**0.0.0.1**		25/09/2017		15:00
+* 	Add Bittrex API
+* 	Add Hash HMAC
+* 	Add dependent files
+
 ## Dependencies
-* **WinHttp** for handling connections, requests 
+* **WinHttp** for handling connections, requests
 * **Json** for handling returned value from exchanges
 * **GraphGDIPlus** for displaying
 * **Hash HMAC** using SHA512 hashing for encrypted-method of account management
+* **Bittrex** for openning API to exchange
+
+currently support Bittex APIs:
+	; ===========================================================================================
+	; Public Functions:
+	; 	time($startDate = "1970/01/01")
+	; 	bittrex_openConnection()
+	; 	bittrex_getMarketSummary($sMarket)
+	; 	bittrex_getMarketHistory($sMarket)
+	; 	bittrex_getTicker($sMarket)
+	; 	bittrex_buyLimit($sMarket, $fQuantity, $fRate)
+	; 	bittrex_sellLimit($sMarket, $fQuantity, $fRate)
+	; 	bittrex_cancel($sUUID)
+	; 	bittrex_getOpenOrders($sMarket="")
+	; 	bittrex_getBalances()
+	; 	bittrex_getBalance($sCurrency)
+	; 	bittrex_getDepositAddress($sCurrency)
+	; ===========================================================================================
 
 ## Contributing guidelines
 I’d love you to help me improve this project. To help me keep this project high
