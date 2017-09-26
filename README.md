@@ -6,16 +6,6 @@ __Monitor the price of your coins, popup alerts, manage your portfolio in realti
 
 _Currently only support [BITTREX](https://bittrex.com/)_
 
-## Author
-* **vuquangtrong** at gmail dot com
-
-Donations are welcome and will be accepted via below addresses:
-
-	BTC:	13e2SdFuyEzqw8dPjRNkyp6rDuTGKaW2rY
-	LTC:	LTAJo4s5eGGMtao5gVjXSCULXV7iSc9ZnL
-
-Thank you for the shiny stuff :kiss:
-
 ## Components
 I'd like to write some small modules first for some purposes:
 * Learning: to get firmiliar with script language, libraries
@@ -58,12 +48,12 @@ It will support **TRADING** and **STOP-LIMIT** feature
 * 	Add CoinGraph v0.0.0.1
 * 	Add dependent files
 
-## Dependencies
-* **WinHttp** for handling connections, requests
-* **Json** for handling returned value from exchanges
-* **GraphGDIPlus** for displaying
-* **Hash HMAC** using SHA512 hashing for encrypted-method of account management
-* **Bittrex** for openning API to exchange
+## Dependencies and Credits:
+* **WinHttp** for handling connections, requests. By **trancexx** at [AutoIT WinHTTP](https://www.autoitscript.com/forum/topic/84133-winhttp-functions/) or [GitHub WinHTTP](https://github.com/dragana-r/autoit-winhttp)
+* **Json** for handling returned value from exchanges, by **Ward** at [AutoIT JSON](http://www.autoitscript.com/forum/index.php?showtopic=148114)
+* **GraphGDIPlus** for displaying nice graphs. by **andybiochem** [AutoIT GraphGDIPlus](http://www.autoitscript.com/forum/index.php?showtopic=104399)
+* **Hash HMAC** using SHA512 hashing for encrypted-method of account management, by me ^^ [GitHub Bittrex](./Bittrex.au3)
+* **Bittrex** for openning API to exchange, by me ^^ at [GitHub HASH HMAC](./Hash_Hmac.au3)
 
 currently support Bittex APIs:
 
@@ -71,6 +61,7 @@ currently support Bittex APIs:
 	; Public Functions:
 	; 	time($startDate = "1970/01/01")
 	; 	bittrex_openConnection()
+	; 	bittrex_closeConnection()
 	; 	bittrex_getMarketSummary($sMarket)
 	; 	bittrex_getMarketHistory($sMarket)
 	; 	bittrex_getTicker($sMarket)
@@ -113,6 +104,16 @@ by automatically forking the project and prompting to send a pull request too.
 [fork]: https://help.github.com/articles/fork-a-repo/
 [branch]: https://help.github.com/articles/creating-and-deleting-branches-within-your-repository
 [pr]: https://help.github.com/articles/using-pull-requests/
+
+## About
+* **vuquangtrong** at gmail dot com
+
+Donations are welcome and will be accepted via below addresses:
+
+	BTC:	13e2SdFuyEzqw8dPjRNkyp6rDuTGKaW2rY
+	LTC:	LTAJo4s5eGGMtao5gVjXSCULXV7iSc9ZnL
+
+Thank you for the shiny stuff :kiss:
 
 ## License
 [Apache-2.0](./LICENSE).
