@@ -104,10 +104,10 @@ Func bittrex_openConnection()
 	Debug("$g_bittrex_hHttpConnect = " & $g_bittrex_hHttpConnect)
 
 	; read account info
-	$g_bittrex_API_Key = IniRead(@ScriptDir & "\apikey.log", "Bittrex", "key", "")
-	$g_bittrex_API_Secret = IniRead(@ScriptDir & "\apikey.log", "Bittrex", "secret", "")
+	$g_bittrex_API_Key = IniRead(@ScriptDir & "\settings.ini", "Bittrex", "key", "")
+	$g_bittrex_API_Secret = IniRead(@ScriptDir & "\settings.ini", "Bittrex", "secret", "")
 
-	Debug("$g_bittrex_API_Key = " & $g_bittrex_API_Key & @CRLF & "$g_bittrex_API_Secret = " & $g_bittrex_API_Secret)
+	Debug("$g_bittrex_API_Key = " & $g_bittrex_API_Key & " $g_bittrex_API_Secret = " & $g_bittrex_API_Secret)
 
 EndFunc   ;==>bittrex_openConnection
 

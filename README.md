@@ -11,21 +11,35 @@ I'd like to write some small modules first for some purposes:
 * Learning: to get firmiliar with script language, libraries
 * Testing: to debug and fix issues easier
 
-1. **CoinAlert**
+**CoinsMonitor**
+This will be the main program that has all feature of **CoinGraph**, and **CoinAlert**.
+It will support **TRADING** and **STOP-LIMIT** feature
+
+Current Status:
+
+* 29/09/2017: Stackable Layout, each coin will be display as a stack which has all necessary actions
+
+![CoinsMonitor_Layout_1](./CoinsMonitor_Layout_1.jpg)
+
+Fill your api key and secret into **settings.ini** file
+
+	[Bittrex]
+	key=
+	secret=
+	watch=
+
+**CoinAlert**
 This module is to popup an alert when the price of selected coins go up/down to a threshold value. When its code is tested, it will be integarated into **CoinsMonitor**.
 Practicing in Json, ListView, Multiple Windows
 
 ![CoinAlert](./CoinAlert.jpg)
 
-2. **CoinGraph**
+**CoinGraph**
 This module is to display the price in a nice graph area. When its code is tested, it will be integarated into **CoinsMonitor**.
 Practicing in GUI, Json, Graphics
 
 ![CoinGraph](./CoinGraph.jpg)
 
-3. **CoinsMonitor**
-This will be the main program that has all feature of **CoinGraph**, and **CoinAlert**.
-It will support **TRADING** and **STOP-LIMIT** feature
 
 ## Run
 * Run **.au3** script directly, or
@@ -48,12 +62,17 @@ It will support **TRADING** and **STOP-LIMIT** feature
 * 	Add CoinGraph v0.0.0.1
 * 	Add dependent files
 
+**0.0.0.4**		29/09/2017		17:00
+* 	Add CoinsMonitor v0.0.0.1
+* 	Add dependent files
+
 ## Dependencies and Credits:
 * **WinHttp** for handling connections, requests. By **trancexx** at [AutoIT WinHTTP](https://www.autoitscript.com/forum/topic/84133-winhttp-functions/) or [GitHub WinHTTP](https://github.com/dragana-r/autoit-winhttp)
 * **Json** for handling returned value from exchanges, by **Ward** at [AutoIT JSON](http://www.autoitscript.com/forum/index.php?showtopic=148114)
 * **GraphGDIPlus** for displaying nice graphs. by **andybiochem** [AutoIT GraphGDIPlus](http://www.autoitscript.com/forum/index.php?showtopic=104399)
-* **Hash HMAC** using SHA512 hashing for encrypted-method of account management, by me ^^ [GitHub Bittrex](./Bittrex.au3)
-* **Bittrex** for openning API to exchange, by me ^^ at [GitHub HASH HMAC](./Hash_Hmac.au3)
+* **Hash HMAC** using SHA512 hashing for encrypted-method of account management, by me ^^ at [GitHub HASH HMAC](./Hash_Hmac.au3)
+* **Bittrex** for openning API to exchange, by me ^^ at [GitHub Bittrex](./Bittrex.au3)
+* **Stack_Component** for creating stackable layout, by me ^^ at [GitHub Bittrex](./Stack_Component.au3)
 
 currently support Bittex APIs:
 
