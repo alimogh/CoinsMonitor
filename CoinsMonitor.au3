@@ -176,17 +176,32 @@ Func Main()
 	; END OF TESTING
 
 	; read settings
+	Debug("Start watching")
 	Local $watch = IniRead(@ScriptDir & "\settings.ini", "Bittrex", "watch", "")
 	Local $watchList = StringSplit($watch, "|")
 	If (Not @error) And $watchList[0] > 0 Then
 		For $i = 1 To $watchList[0]
 			Stack_CreateStack($watchList[$i])
+			Sleep(1000)
 		Next
 	EndIf
 
+	; update markets
+	Local $dayUpdate = IniRead(@ScriptDir & "\settings.ini", "Bittrex", "lastUpdateMarket", "")
+	Local $dayDiff = _DateDiff('D', $dayUpdate, _NowCalc())
+	If @error Or $dayDiff > 0 Then
+		Debug("Fetch markets")
+		Local $markets = bittrex_getMarkets()
+		IniWrite(@ScriptDir & "\settings.ini", "Bittrex", "markets", _ArrayToString($markets, "|"))
+		IniWrite(@ScriptDir & "\settings.ini", "Bittrex", "lastUpdateMarket", _NowCalc())
+	EndIf
+
+	; Show window
+	Debug("Show UI")
 	DockWindow()
 	GUISetState(@SW_SHOW, $g_hGUI)
 
+	; Loop forever
 	While (1)
 		Sleep(1000)
 	WEnd
@@ -197,13 +212,19 @@ EndFunc   ;==>Main
 ; ===========================================================
 Func AddMarket($sMarket)
 	; check market
-	;;;$allMarket = IniRead(@ScriptDir & "\settings.ini", "Bittrex", "markets", "")
+	Local $allMarket = IniRead(@ScriptDir & "\settings.ini", "Bittrex", "markets", "")
 
-	;;;If StringInStr($allMarket, $sMarket) Then
-	; add to watch
-	IniWrite(@ScriptDir & "\settings.ini", "Bittrex", "watch", IniRead(@ScriptDir & "\settings.ini", "Bittrex", "watch", "") & $sMarket & "|")
-	Stack_CreateStack($sMarket)
-	;;;EndIf
+	If StringInStr($allMarket, $sMarket) Then
+
+		; if market is already shown, skip adding
+		For $i = 1 To Stack_GetItemsCount()
+			If Stack_GetItemTitle($i) = $sMarket Then Return
+		Next
+
+		; add to watch
+		IniWrite(@ScriptDir & "\settings.ini", "Bittrex", "watch", IniRead(@ScriptDir & "\settings.ini", "Bittrex", "watch", "") & $sMarket & "|")
+		Stack_CreateStack($sMarket)
+	EndIf
 EndFunc   ;==>AddMarket
 
 ; ===========================================================
@@ -253,7 +274,11 @@ EndFunc   ;==>DockWindow
 ; ThreadUpdate($hWnd, $iMsg, $iIDTimer, $iTime)
 ; ===========================================================
 Func ThreadUpdate($hWnd, $iMsg, $iIDTimer, $iTime)
+
+	;Return
+
 	Local $index = 0
+	Local Static $counter = 0
 
 	; get index
 	For $i = 1 To Stack_GetItemsCount()
@@ -274,15 +299,19 @@ Func ThreadUpdate($hWnd, $iMsg, $iIDTimer, $iTime)
 	EndIf
 	Stack_SetItemPrice($index, $newPrice)
 
-	; update change
 	#cs
+		; update change
+		$counter = $counter + 1
+		If $counter > 2 Then
+		$counter = 0
 		Local $summary = bittrex_getMarketSummary(Stack_GetItemTitle($index))
-		If ($summary[1] >= $summary[0]) Then
+		If ($newPrice >= $summary[2]) Then
 		GUICtrlSetColor(Stack_GetItemChangeID($index), $g_iUPTREND)
 		Else
 		GUICtrlSetColor(Stack_GetItemChangeID($index), $g_iDOWNTREND)
 		EndIf
-		Stack_SetItemChange($index, $summary[1] - $summary[0])
+		Stack_SetItemChange($index, ($newPrice - $summary[2]) * 100 / $summary[2])
+		EndIf
 	#ce
 
 EndFunc   ;==>ThreadUpdate

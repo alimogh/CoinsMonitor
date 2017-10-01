@@ -32,6 +32,7 @@
 #ce
 
 #include-once
+#include <Array.au3>
 #include <WinAPIvkeysConstants.au3>
 #include <GUIConstantsEx.au3>
 #include <WindowsConstants.au3>
@@ -231,7 +232,8 @@ EndFunc   ;==>Stack_SetItemChange
 ; ===========================================================
 Func Stack_SetItemTotal($i, $sTotal)
 	If $i >= 0 And $i <= Stack_GetItemsCount() Then
-		GUICtrlSetData($g_aStacks[$i][6], $sTotal)
+		Local $data = StringFormat("%10.5f", $sTotal)
+		GUICtrlSetData($g_aStacks[$i][6], $data)
 	EndIf
 EndFunc   ;==>Stack_SetItemTotal
 
@@ -240,7 +242,8 @@ EndFunc   ;==>Stack_SetItemTotal
 ; ===========================================================
 Func Stack_SetItemAvailable($i, $sAvailable)
 	If $i >= 0 And $i <= Stack_GetItemsCount() Then
-		GUICtrlSetData($g_aStacks[$i][7], $sAvailable)
+		Local $data = StringFormat("%10.5f", $sAvailable)
+		GUICtrlSetData($g_aStacks[$i][7], $data)
 	EndIf
 EndFunc   ;==>Stack_SetItemAvailable
 
@@ -249,7 +252,8 @@ EndFunc   ;==>Stack_SetItemAvailable
 ; ===========================================================
 Func Stack_SetItemPending($i, $sPending)
 	If $i >= 0 And $i <= Stack_GetItemsCount() Then
-		GUICtrlSetData($g_aStacks[$i][8], $sPending)
+		Local $data = StringFormat("%10.5f", $sPending)
+		GUICtrlSetData($g_aStacks[$i][8], $data)
 	EndIf
 EndFunc   ;==>Stack_SetItemPending
 
@@ -258,7 +262,8 @@ EndFunc   ;==>Stack_SetItemPending
 ; ===========================================================
 Func Stack_SetItemBuyPrice($i, $sBuyPrice)
 	If $i >= 0 And $i <= Stack_GetItemsCount() Then
-		GUICtrlSetData($g_aStacks[$i][10], $sBuyPrice)
+		Local $data = StringFormat("%10.5f", $sBuyPrice)
+		GUICtrlSetData($g_aStacks[$i][10], $data)
 	EndIf
 EndFunc   ;==>Stack_SetItemBuyPrice
 
@@ -267,7 +272,8 @@ EndFunc   ;==>Stack_SetItemBuyPrice
 ; ===========================================================
 Func Stack_SetItemBuyWhen($i, $sBuyWhen)
 	If $i >= 0 And $i <= Stack_GetItemsCount() Then
-		GUICtrlSetData($g_aStacks[$i][11], $sBuyWhen)
+		Local $data = StringFormat("%10.5f", $sBuyWhen)
+		GUICtrlSetData($g_aStacks[$i][11], $data)
 	EndIf
 EndFunc   ;==>Stack_SetItemBuyWhen
 
@@ -276,7 +282,8 @@ EndFunc   ;==>Stack_SetItemBuyWhen
 ; ===========================================================
 Func Stack_SetItemBuyLimit($i, $sBuyLimit)
 	If $i >= 0 And $i <= Stack_GetItemsCount() Then
-		GUICtrlSetData($g_aStacks[$i][12], $sBuyLimit)
+		Local $data = StringFormat("%10.5f", $sBuyLimit)
+		GUICtrlSetData($g_aStacks[$i][12], $data)
 	EndIf
 EndFunc   ;==>Stack_SetItemBuyLimit
 
@@ -285,7 +292,8 @@ EndFunc   ;==>Stack_SetItemBuyLimit
 ; ===========================================================
 Func Stack_SetItemSellPrice($i, $sSellPrice)
 	If $i >= 0 And $i <= Stack_GetItemsCount() Then
-		GUICtrlSetData($g_aStacks[$i][14], $sSellPrice)
+		Local $data = StringFormat("%10.5f", $sSellPrice)
+		GUICtrlSetData($g_aStacks[$i][14], $data)
 	EndIf
 EndFunc   ;==>Stack_SetItemSellPrice
 
@@ -294,7 +302,8 @@ EndFunc   ;==>Stack_SetItemSellPrice
 ; ===========================================================
 Func Stack_SetItemSellWhen($i, $sSellWhen)
 	If $i >= 0 And $i <= Stack_GetItemsCount() Then
-		GUICtrlSetData($g_aStacks[$i][15], $sSellWhen)
+		Local $data = StringFormat("%10.5f", $sSellWhen)
+		GUICtrlSetData($g_aStacks[$i][15], $data)
 	EndIf
 EndFunc   ;==>Stack_SetItemSellWhen
 
@@ -303,7 +312,8 @@ EndFunc   ;==>Stack_SetItemSellWhen
 ; ===========================================================
 Func Stack_SetItemSellLimit($i, $sSellLimit)
 	If $i >= 0 And $i <= Stack_GetItemsCount() Then
-		GUICtrlSetData($g_aStacks[$i][16], $sSellLimit)
+		Local $data = StringFormat("%10.5f", $sSellLimit)
+		GUICtrlSetData($g_aStacks[$i][16], $data)
 	EndIf
 EndFunc   ;==>Stack_SetItemSellLimit
 
@@ -312,7 +322,17 @@ EndFunc   ;==>Stack_SetItemSellLimit
 ; ===========================================================
 Func Stack_SetItemProfit($i, $sProfit)
 	If $i >= 0 And $i <= Stack_GetItemsCount() Then
-		GUICtrlSetData($g_aStacks[$i][17], $sProfit)
+		Local $data = StringFormat("%+5.2f%%", $sProfit)
+		GUICtrlSetData($g_aStacks[$i][17], $data)
+	EndIf
+EndFunc   ;==>Stack_SetItemProfit
+
+; ===========================================================
+; Stack_GetItemProfitID($i)
+; ===========================================================
+Func Stack_GetItemProfitID($i)
+	If $i >= 0 And $i <= Stack_GetItemsCount() Then
+		Return $g_aStacks[$i][17]
 	EndIf
 EndFunc   ;==>Stack_SetItemProfit
 
@@ -321,7 +341,8 @@ EndFunc   ;==>Stack_SetItemProfit
 ; ===========================================================
 Func Stack_SetItemProfitLimit($i, $sProfitLimit)
 	If $i >= 0 And $i <= Stack_GetItemsCount() Then
-		GUICtrlSetData($g_aStacks[$i][19], $sProfitLimit)
+		Local $data = StringFormat("%+5.2f%%", $sProfitLimit)
+		GUICtrlSetData($g_aStacks[$i][19], $data)
 	EndIf
 EndFunc   ;==>Stack_SetItemProfitLimit
 
@@ -469,6 +490,20 @@ Func Stack_onToggleProtectProfit()
 	Next
 EndFunc   ;==>Stack_onToggleProtectProfit
 
+; ===========================================================
+; Stack_onDeleteItem()
+; ===========================================================
+Func Stack_onDeleteItem()
+	Debug("Stack_onDeleteItem")
+	For $i = 1 To UBound($g_aStacks) - 1
+		If @GUI_WinHandle = $g_aStacks[$i][0] Then
+			_ArrayDelete($g_aStacks, $i)
+			If $g_pDrawFunction <> Null Then Call($g_pDrawFunction)
+			ExitLoop
+		EndIf
+	Next
+EndFunc   ;==>Stack_onToggleProtectProfit
+
 ; ==================================================================================
 ; Stack_CreateStack($title = "", $height = Default)
 ; ==================================================================================
@@ -517,6 +552,13 @@ Func Stack_CreateStack($title = "", $height = Default)
 	GUICtrlSetFont(-1, 10, 400, 0, "Consolas")
 	GUICtrlSetColor(-1, $g_iDISABLED)
 
+	; !!!Remove stack button
+	GUICtrlCreateLabel("X", 2, 38 + 2 + 6, 12, 12, BitOR($SS_RIGHT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
+	GUICtrlSetResizing(-1, $GUI_DOCKALL)
+	GUICtrlSetFont(-1, 12, 400, 0, "Consolas")
+	GUICtrlSetColor(-1, $g_iDISABLED)
+	GUICtrlSetOnEvent(-1, "Stack_onDeleteItem")
+
 	; Current Price
 	Local $sPrice = GUICtrlCreateLabel("-", 64, 0, 90, 26, BitOR($SS_RIGHT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
 	GUICtrlSetResizing(-1, $GUI_DOCKALL)
@@ -560,10 +602,10 @@ Func Stack_CreateStack($title = "", $height = Default)
 	$g_aStacks[$itemCount - 1][19] = $sProfitLimit
 
 	; Change in 1h/12h/24h
-	Local $sChangePeriod = GUICtrlCreateLabel("24H", 174, 2, 46, 12, BitOR($SS_LEFT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
+	Local $sChangePeriod = GUICtrlCreateLabel("24H", 174, 2, 48, 14, BitOR($SS_LEFT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
 	GUICtrlSetResizing(-1, $GUI_DOCKALL)
 	GUICtrlSetFont(-1, 10, 400, 0, "Consolas")
-	GUICtrlSetColor(-1, 0xFFFFFF)
+	GUICtrlSetColor(-1, $g_iDISABLED)
 	$g_aStacks[$itemCount - 1][4] = $sChangePeriod
 
 	Local $sChange = GUICtrlCreateLabel("-", 174, 16, 48, 20, BitOR($SS_RIGHT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
@@ -573,7 +615,7 @@ Func Stack_CreateStack($title = "", $height = Default)
 	$g_aStacks[$itemCount - 1][5] = $sChange
 
 	; Total assest
-	GUICtrlCreateLabel("Total", 240, 2, 90, 12, BitOR($SS_LEFT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
+	GUICtrlCreateLabel("Total", 240, 2, 90, 14, BitOR($SS_LEFT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
 	GUICtrlSetResizing(-1, $GUI_DOCKALL)
 	GUICtrlSetFont(-1, 10, 400, 0, "Consolas")
 	GUICtrlSetColor(-1, 0xFFFFFF)
@@ -591,7 +633,7 @@ Func Stack_CreateStack($title = "", $height = Default)
 	GUICtrlSetColor(-1, 0x35A1FF)
 	GUICtrlSetOnEvent(-1, "Stack_onShowDetail")
 
-	GUICtrlCreateLabel("available", 240, 38 + 2, 90, 12, BitOR($SS_LEFT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
+	GUICtrlCreateLabel("available", 240, 38 + 2, 90, 14, BitOR($SS_LEFT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
 	GUICtrlSetResizing(-1, $GUI_DOCKALL)
 	GUICtrlSetFont(-1, 10, 400, 0, "Consolas")
 	GUICtrlSetColor(-1, $g_iUPTREND)
@@ -602,7 +644,7 @@ Func Stack_CreateStack($title = "", $height = Default)
 	GUICtrlSetColor(-1, $g_iUPTREND)
 	$g_aStacks[$itemCount - 1][7] = $sAvailable
 
-	GUICtrlCreateLabel("pending", 240, 38 + 38 + 2, 90, 12, BitOR($SS_LEFT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
+	GUICtrlCreateLabel("pending", 240, 38 + 38 + 2, 90, 14, BitOR($SS_LEFT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
 	GUICtrlSetResizing(-1, $GUI_DOCKALL)
 	GUICtrlSetFont(-1, 10, 400, 0, "Consolas")
 	GUICtrlSetColor(-1, $g_iDOWNTREND)
@@ -619,7 +661,7 @@ Func Stack_CreateStack($title = "", $height = Default)
 	GUICtrlSetOnEvent(-1, "Stack_onToggleAutoBuy")
 	$g_aStacks[$itemCount - 1][9] = $sIsBuyAuto
 
-	GUICtrlCreateLabel("Auto Buy", 350 + 12 + 2, 0, 64, 12, BitOR($SS_LEFT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
+	GUICtrlCreateLabel("Auto Buy", 350 + 12 + 2, 0, 64, 16, BitOR($SS_LEFT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
 	GUICtrlSetResizing(-1, $GUI_DOCKALL)
 	GUICtrlSetFont(-1, 10, 400, 0, "Consolas")
 	GUICtrlSetColor(-1, 0xFFFFFF)
@@ -636,7 +678,7 @@ Func Stack_CreateStack($title = "", $height = Default)
 	GUICtrlSetColor(-1, 0x35A1FF)
 	GUICtrlSetOnEvent(-1, "Stack_onShowDetail")
 
-	GUICtrlCreateLabel("if down to", 350, 38 + 2, 90, 12, BitOR($SS_LEFT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
+	GUICtrlCreateLabel("if down to", 350, 38 + 2, 90, 14, BitOR($SS_LEFT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
 	GUICtrlSetResizing(-1, $GUI_DOCKALL)
 	GUICtrlSetFont(-1, 10, 400, 0, "Consolas")
 	GUICtrlSetColor(-1, 0xFFFFFF)
@@ -647,7 +689,7 @@ Func Stack_CreateStack($title = "", $height = Default)
 	GUICtrlSetColor(-1, $g_iDISABLED)
 	$g_aStacks[$itemCount - 1][11] = $sBuyWhen
 
-	GUICtrlCreateLabel("quantity", 350, 38 + 38 + 2, 90, 12, BitOR($SS_LEFT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
+	GUICtrlCreateLabel("quantity", 350, 38 + 38 + 2, 90, 14, BitOR($SS_LEFT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
 	GUICtrlSetResizing(-1, $GUI_DOCKALL)
 	GUICtrlSetFont(-1, 10, 400, 0, "Consolas")
 	GUICtrlSetColor(-1, 0xFFFFFF)
@@ -664,7 +706,7 @@ Func Stack_CreateStack($title = "", $height = Default)
 	GUICtrlSetOnEvent(-1, "Stack_onToggleAutoSell")
 	$g_aStacks[$itemCount - 1][13] = $sIsSellAuto
 
-	GUICtrlCreateLabel("Auto Sell", 460 + 12 + 2, 0, 64, 12, BitOR($SS_LEFT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
+	GUICtrlCreateLabel("Auto Sell", 460 + 12 + 2, 0, 64, 16, BitOR($SS_LEFT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
 	GUICtrlSetResizing(-1, $GUI_DOCKALL)
 	GUICtrlSetFont(-1, 10, 400, 0, "Consolas")
 	GUICtrlSetColor(-1, 0xFFFFFF)
@@ -681,7 +723,7 @@ Func Stack_CreateStack($title = "", $height = Default)
 	GUICtrlSetColor(-1, 0x35A1FF)
 	GUICtrlSetOnEvent(-1, "Stack_onShowDetail")
 
-	GUICtrlCreateLabel("if down to", 460, 38 + 2, 90, 12, BitOR($SS_LEFT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
+	GUICtrlCreateLabel("if up to", 460, 38 + 2, 90, 14, BitOR($SS_LEFT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
 	GUICtrlSetResizing(-1, $GUI_DOCKALL)
 	GUICtrlSetFont(-1, 10, 400, 0, "Consolas")
 	GUICtrlSetColor(-1, 0xFFFFFF)
@@ -692,7 +734,7 @@ Func Stack_CreateStack($title = "", $height = Default)
 	GUICtrlSetColor(-1, $g_iDISABLED)
 	$g_aStacks[$itemCount - 1][15] = $sSellWhen
 
-	GUICtrlCreateLabel("quantity", 460, 38 + 38 + 2, 90, 12, BitOR($SS_LEFT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
+	GUICtrlCreateLabel("quantity", 460, 38 + 38 + 2, 90, 14, BitOR($SS_LEFT, $BS_CENTER), $UDF_WS_EX_STATICEDGE)
 	GUICtrlSetResizing(-1, $GUI_DOCKALL)
 	GUICtrlSetFont(-1, 10, 400, 0, "Consolas")
 	GUICtrlSetColor(-1, 0xFFFFFF)
@@ -710,7 +752,7 @@ Func Stack_CreateStack($title = "", $height = Default)
 
 	; start update thread
 	If $g_pUpdateFunction <> Null Then
-		_Timer_SetTimer($hStack, 5000, $g_pUpdateFunction)
+		$g_aStacks[$itemCount - 1][20] = _Timer_SetTimer($hStack, 5000, $g_pUpdateFunction)
 	EndIf
 
 	; show it

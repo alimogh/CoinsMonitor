@@ -54,6 +54,7 @@
 ; 	time($startDate = "1970/01/01")
 ; 	bittrex_openConnection()
 ; 	bittrex_closeConnection()
+; 	bittrex_getMarkets()
 ; 	bittrex_getMarketSummary($sMarket)
 ; 	bittrex_getMarketHistory($sMarket)
 ; 	bittrex_getTicker($sMarket)
@@ -130,14 +131,99 @@ Func bittrex_closeConnection()
 EndFunc   ;==>bittrex_closeConnection
 
 ;==============================================================================
+; bittrex_getMarkets()
+; 	return an array $markets[] with
+; 		$markets[0] - the number of markets
+; 		$markets[i] - the name of market
+;==============================================================================
+Func bittrex_getMarkets()
+	Local $Success = False
+	Local $markets[1] = [0]
+	Local $ItemCount = 0
+
+	Debug("bittrex_getMarkets")
+
+	If $g_bittrex_hHttpConnect = Null Then
+		Debug("$g_bittrex_hHttpConnect is not openned")
+		Return $markets
+	EndIf
+
+	$g_bittrex_hHttpRequestSSL = _WinHttpSimpleSendSSLRequest($g_bittrex_hHttpConnect, Default, "api/v1.1/public/getmarkets")
+
+	; Read...
+	$g_bittrex_sHttpReturned = _WinHttpSimpleReadData($g_bittrex_hHttpRequestSSL)
+	Debug($g_bittrex_sHttpReturned)
+
+	#cs
+		{
+		"success" : true,
+		"message" : "",
+		"result" : [{
+		"MarketCurrency" : "LTC",
+		"BaseCurrency" : "BTC",
+		"MarketCurrencyLong" : "Litecoin",
+		"BaseCurrencyLong" : "Bitcoin",
+		"MinTradeSize" : 0.01000000,
+		"MarketName" : "BTC-LTC",
+		"IsActive" : true,
+		"Created" : "2014-02-13T00:00:00"
+		}, {
+		"MarketCurrency" : "DOGE",
+		"BaseCurrency" : "BTC",
+		"MarketCurrencyLong" : "Dogecoin",
+		"BaseCurrencyLong" : "Bitcoin",
+		"MinTradeSize" : 100.00000000,
+		"MarketName" : "BTC-DOGE",
+		"IsActive" : true,
+		"Created" : "2014-02-13T00:00:00"
+		}
+		]
+		}
+	#ce
+	; Decode JSON result
+	$g_bittrex_oJsonObject = Json_Decode($g_bittrex_sHttpReturned)
+
+	If (Not Json_IsObject($g_bittrex_oJsonObject)) Then
+		Debug("NOT Json Object $g_bittrex_oJsonObject")
+		Return $markets
+	EndIf
+
+	; Check success
+	$Success = Json_Get($g_bittrex_oJsonObject, "[success]")
+	If $Success Then
+		; Get info
+		Local $oJson_Result = Json_Get($g_bittrex_oJsonObject, "[result]")
+
+		$ItemCount = UBound($oJson_Result)
+		Debug("$ItemCount = " & $ItemCount)
+
+		ReDim $markets[$ItemCount + 1]
+
+		$markets[0] = $ItemCount
+
+		For $i = 1 To $ItemCount
+			$markets[$i] = Json_Get($oJson_Result[$i - 1], "[MarketName]")
+		Next
+	Else
+		Debug("Request failed!!!")
+	EndIf
+
+	; Clear JSON object
+	Json_ObjClear($g_bittrex_oJsonObject)
+
+	Return $markets
+EndFunc   ;==>bittrex_getMarkets
+
+;==============================================================================
 ; bittrex_getMarketSummary($sMarket)
-; 	return $Price[2] information of market in last 24h with details as below:
+; 	return $Price[3] information of market in last 24h with details as below:
 ; 		$Price[0] - lowest price
 ; 		$Price[1] - highest price
+; 		$Price[2] - previous day price
 ;==============================================================================
 Func bittrex_getMarketSummary($sMarket)
 	Local $Success = False
-	Local $Price[2] = [0, 0]
+	Local $Price[3] = [0, 0, 0]
 
 	Debug("getMarketSummary " & $sMarket)
 
@@ -190,6 +276,7 @@ Func bittrex_getMarketSummary($sMarket)
 		; Get info
 		$Price[0] = Number(Json_Get($g_bittrex_oJsonObject, "[result][0][Low]"))
 		$Price[1] = Number(Json_Get($g_bittrex_oJsonObject, "[result][0][High]"))
+		$Price[2] = Number(Json_Get($g_bittrex_oJsonObject, "[result][0][PrevDay]"))
 	Else
 		Debug("Request failed!!!")
 	EndIf
